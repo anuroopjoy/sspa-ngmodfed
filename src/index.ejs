@@ -6,6 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Root Config</title>
 
+  <script src="http://localhost:4200/remoteEntry.js"></script>
+  <script src="http://localhost:4201/remoteEntry.js"></script>
+
   <!--
     Remove this if you only support browsers that support async/await.
     This is needed by babel to share largeish helper code for compiling async/await in older
@@ -39,22 +42,6 @@
     }
   </script>
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
-
-  <!-- Add your organization's prod import map URL to this script's src  -->
-  <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
-
-  <% if (isLocal) { %>
-  <script type="systemjs-importmap">
-    {
-      "imports": {
-        "@app/root-config": "//localhost:9000/app-root-config.js",
-        "@app/angular1": "//localhost:4200/main.js",
-        "@app/angular2": "//localhost:4201/main.js"
-      }
-    }
-  </script>
-  <% } %>
-
   <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
     Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
@@ -69,15 +56,12 @@
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
   <% } %>
-
+  <script src="app-root-config.js"></script>
 </head>
 <body>
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
-  <script>
-    System.import('@app/root-config');
-  </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>
 </html>

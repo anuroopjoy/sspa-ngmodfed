@@ -1,20 +1,14 @@
 import { registerApplication, start } from "single-spa";
-import {
-  constructApplications,
-  constructRoutes,
-  constructLayoutEngine,
-} from "single-spa-layout";
-import microfrontendLayout from "./microfrontend-layout.html";
 
-const routes = constructRoutes(microfrontendLayout);
-const applications = constructApplications({
-  routes,
-  loadApp({ name }) {
-    return System.import(name);
-  },
+registerApplication({
+  name: "angular1",
+  app: () => import("ngmfe1/MFEModule1"),
+  activeWhen: "#/angular1",
 });
-const layoutEngine = constructLayoutEngine({ routes, applications });
+registerApplication({
+  name: "angular2",
+  app: () => import("ngmfe2/MFEModule2"),
+  activeWhen: "#/angular2",
+});
 
-applications.forEach(registerApplication);
-layoutEngine.activate();
 start();

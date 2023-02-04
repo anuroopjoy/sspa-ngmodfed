@@ -11,10 +11,10 @@ const applications = constructApplications({
   routes,
   loadApp({ name }) {
     const moduleMap = {
-      "@app/angular1": import("ngmfe1/MFEModule1"),
-      "@app/angular2": import("ngmfe2/MFEModule2"),
+      "@app/angular1": () => import("ngmfe1/MFEModule1"),
+      "@app/angular2": () => import("ngmfe2/MFEModule2"),
     };
-    return moduleMap[name];
+    return moduleMap[name]();
   },
 });
 const layoutEngine = constructLayoutEngine({ routes, applications });
